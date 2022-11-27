@@ -1,0 +1,33 @@
+from django.db import models
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
+
+class TaggedItemManager(models.Manager):
+    """ Managar class for querying TaggedItem model """
+    def get_tags_for(self, obj_type, obj_id):
+        content_type = ContentType.objects.get_for_model(obj_type)
+
+        return TaggedItem.objects \
+            .select_related('tag') \
+            .filter(
+                content_type=content_type,
+                object_id=obj_id
+        )
+
+
+class Tag(models.Model):
+    """ Tag for global models """
+    label = models.CharField(max_length=255)
+    
+class TaggedItem(models.Model):
+    """ TaggedItem model for any models need add tag"""
+    # What tag applied to what object
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
+    # Type (product, video, article)
+    # ID
+    # for generic relation to product
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey()
+
+    objects = TaggedItemManager()
