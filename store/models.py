@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.urls import reverse, reverse_lazy
 from uuid import uuid4
 
 from django.conf import settings
@@ -51,6 +52,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('store:product_detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Products'
