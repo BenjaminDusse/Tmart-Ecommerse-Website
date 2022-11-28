@@ -118,7 +118,7 @@
                                     <div class="col-md-9 col-lg-9 col-sm-8 col-xs-12">
                                         <div class="list__details__inner">
                                             <h2><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h2>
-                                            <p>{{ product.description|truncatewords:4 }}</p>
+                                            <p>{{ product.description|truncatewords:4|safe }}</p>
                                             <span class="product__price">${{product.unit_price}}</span>
                                             <div class="shop__btn">
                                                 <a class="htc__btn" href="cart.html"><span

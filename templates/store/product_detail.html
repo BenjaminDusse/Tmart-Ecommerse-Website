@@ -35,6 +35,13 @@
                         <div class="scroll-single-product mb--30">
                             <img src="{{ product.image.url }}" alt="full-image">
                         </div>
+                        {% if product.images %}
+                        {% for product_image in product.images.all %}
+                        <div class="scroll-single-product mb--30">
+                            <img src="{{ product_image.image.url }}" alt="full-image">
+                        </div>
+                        {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="sidebar-active col-md-5 col-lg-5 col-sm-7 col-xs-12 xmt-30">
@@ -53,7 +60,7 @@
                             <span class="rat__qun">(Based on 0 Ratings)</span>
                         </div>
                         <div class="pro__details">
-                            <p>{{ product.description }}</p>
+                            <p>{{ product.description|safe }}</p>
                         </div>
                         <ul class="pro__dtl__prize">
                             <!-- <li class="old__prize">$15.21</li> -->
@@ -121,7 +128,7 @@
                         <a href="#description" role="tab" data-toggle="tab">Description</a>
                     </li>
                     <li role="presentation">
-                        <a href="#sheet" role="tab" data-toggle="tab">Data sheet</a>
+                        <a href="#sheet" role="tab" data-toggle="tab">Blog</a>
                     </li>
                     <li role="presentation">
                         <a href="#reviews" role="tab" data-toggle="tab">Reviews</a>
@@ -137,24 +144,24 @@
                         <div class="product__description__wrap">
                             <div class="product__desc">
                                 <h2 class="title__6">Details</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis noexercit
-                                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                    mollit anim id.</p>
+                                {% if product.details %}
+                                <p>{{ product.details }}</p>
+                                {% else %}
+                                <p>No any details!</p>
+                                {% endif %}
                             </div>
                             <div class="pro__feature">
                                 <h2 class="title__6">Features</h2>
                                 <ul class="feature__list">
-                                    <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse</a></li>
-                                    <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in
-                                            voluptate velit esse</a></li>
-                                    <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor
-                                            incididunt ut labore et </a></li>
-                                    <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo
-                                            consequat.</a></li>
+                                    {% if product.features %}
+                                    <li>
+                                        <a href="#">
+                                            <i class="zmdi zmdi-play-circle"></i>
+                                        </a>
+                                    </li>
+                                    {% else %}
+                                    <p>No available features</p>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
@@ -163,22 +170,14 @@
                     <!-- Start Single Content -->
                     <div role="tabpanel" id="sheet" class="product__tab__content fade">
                         <div class="pro__feature">
-                            <h2 class="title__6">Data sheet</h2>
+                            <h2 class="title__6">Blog</h2>
                             <ul class="feature__list">
-                                <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Duis aute irure dolor in
-                                        reprehenderit in voluptate velit esse</a></li>
-                                <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in
-                                        voluptate velit esse</a></li>
-                                <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in
-                                        voluptate velit esse</a></li>
-                                <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut
-                                        labore et </a></li>
-                                <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut
-                                        labore et </a></li>
-                                <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo
-                                        consequat.</a></li>
-                                <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo
-                                        consequat.</a></li>
+                                <li>
+                                    <a href="#">
+                                        <i class="zmdi zmdi-play-circle"></i>
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>

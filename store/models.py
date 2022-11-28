@@ -46,14 +46,15 @@ class Collection(models.Model):
             self.slug = slugify(self.title)
             return super().save(*args, **kwargs)
 
-    
-
 class Product(models.Model):
     """Product(item) model"""
 
     title = models.CharField(max_length=255)
+    slogan = models.CharField(max_length=255)
     slug = models.SlugField()
     description = RichTextField()
+    details = RichTextField(blank=True)
+    features = RichTextField(blank=True)
     unit_price = models.DecimalField(
         max_digits=6, decimal_places=2, validators=[MinValueValidator(1)]
     )
@@ -63,7 +64,7 @@ class Product(models.Model):
     promotions = models.ManyToManyField(Promotion, blank=True)
     image = models.ImageField(upload_to='product_images/')
 
-    
+
     def __str__(self):
         return self.title
 
