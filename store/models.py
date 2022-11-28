@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.urls import reverse, reverse_lazy
+from django.utils.text import slugify
 from uuid import uuid4
 
 from django.conf import settings
@@ -25,6 +26,7 @@ class Collection(models.Model):
     """Category for products"""
 
     title = models.CharField(max_length=255)
+    slug = models.SlugField(blank=True)
     featured_product = models.ForeignKey(
         "Product", on_delete=models.SET_NULL, null=True, blank=True, related_name="+"
     )  # when 2 models are connected in a circle relationship, if it says related name, you should add + to related name
@@ -35,6 +37,14 @@ class Collection(models.Model):
     class Meta:
         verbose_name = 'Collections'
         verbose_name_plural = 'Collection'
+
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+            return super().save(*args, **kwargs)
+
+    
 
 class Product(models.Model):
     """Product(item) model"""
@@ -49,7 +59,9 @@ class Product(models.Model):
     last_update = models.DateTimeField(auto_now=True)
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT)
     promotions = models.ManyToManyField(Promotion, blank=True)
+    image = models.ImageField(upload_to='product_images/')
 
+    
     def __str__(self):
         return self.title
 
@@ -59,6 +71,11 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Products'
         verbose_name_plural = 'Product'
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
+    featured_image = models.BooleanField(default=False)
+    image = models.ImageField(upload_to='store_images')
 
 class Customer(models.Model):
     """Customer in platform"""

@@ -1,6 +1,6 @@
--- create database storefront3;
--- drop database storefront3;
-use storefront3;
+-- create database tmart;
+-- drop database tmart;
+ use tmart;
 
 --  Collection
 insert into store_collection (id, title) values (1, 'Sports');

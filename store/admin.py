@@ -120,3 +120,6 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'placed_at', 'customer']
     inlines = [OrderItemInline]
     autocomplete_fields = ['customer']
+
+admin.site.register(models.ProductImage)
+
