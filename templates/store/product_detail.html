@@ -145,7 +145,7 @@
                             <div class="product__desc">
                                 <h2 class="title__6">Details</h2>
                                 {% if product.details %}
-                                <p>{{ product.details }}</p>
+                                <p>{{ product.details|safe }}</p>
                                 {% else %}
                                 <p>No any details!</p>
                                 {% endif %}
@@ -155,9 +155,7 @@
                                 <ul class="feature__list">
                                     {% if product.features %}
                                     <li>
-                                        <a href="#">
-                                            <i class="zmdi zmdi-play-circle"></i>
-                                        </a>
+                                        {{ product.features|safe }}
                                     </li>
                                     {% else %}
                                     <p>No available features</p>
