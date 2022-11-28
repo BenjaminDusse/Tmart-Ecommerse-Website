@@ -6,3 +6,4 @@ sqlparse==0.4.3
 typing-extensions==4.4.0
 mysqlclient==1.4.6
 Pillow=9.3
+django-ckeditor==6.3.2

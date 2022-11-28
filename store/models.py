@@ -1,4 +1,6 @@
 from django.contrib import admin
+from ckeditor.fields import RichTextField
+# content = RichTextField()
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.urls import reverse, reverse_lazy
@@ -51,7 +53,7 @@ class Product(models.Model):
 
     title = models.CharField(max_length=255)
     slug = models.SlugField()
-    description = models.TextField()
+    description = RichTextField()
     unit_price = models.DecimalField(
         max_digits=6, decimal_places=2, validators=[MinValueValidator(1)]
     )
