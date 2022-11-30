@@ -1,10 +1,11 @@
 from django.contrib import admin
 from ckeditor.fields import RichTextField
-# content = RichTextField()
+from django.db.models.query import QuerySet
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.urls import reverse, reverse_lazy
 from django.utils.text import slugify
+from mptt.models import MPTTModel, TreeForeignKey
 from uuid import uuid4
 
 from django.conf import settings
@@ -24,9 +25,9 @@ class Promotion(models.Model):
         verbose_name_plural = 'Promotion'
 
 
-class Collection(models.Model):
+class Collection(MPTTModel, models.Model):
     """Category for products"""
-
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, related_name='children', blank=True, null=True)
     title = models.CharField(max_length=255)
     slug = models.SlugField(blank=True)
     featured_product = models.ForeignKey(
@@ -50,7 +51,6 @@ class Product(models.Model):
     """Product(item) model"""
 
     title = models.CharField(max_length=255)
-    slogan = models.CharField(max_length=255)
     slug = models.SlugField()
     description = RichTextField()
     details = RichTextField(blank=True)

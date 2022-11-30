@@ -89,7 +89,7 @@ admin.site.register(models.Review)
 
 @admin.register(models.Collection)
 class CollectionAdmin(admin.ModelAdmin):
-    list_display = ['title', 'products_count']
+    list_display = ['id', 'title', 'products_count', 'parent']
     search_fields = ['title']
 
     @admin.display(ordering='products_count')

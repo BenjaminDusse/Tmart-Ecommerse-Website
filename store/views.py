@@ -1,10 +1,19 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
-from store.models import Product, ProductImage
+from store.models import Product, ProductImage, Collection
 
 
 def home(request):
-    return render(request, 'store/index.html')
+    collections = Collection.objects.only('title', 'parent').filter(parent_id__isnull=True)
+    # parent_id = request.
+    # collection_children = Collection.objects.filter(parent_id__isnull=False)
+    
+    context = {
+        'collections': collections,
+        # 'collection_children': collection_children,
+    }
+
+    return render(request, 'store/index.html', context)
 
 
 def products(request):
@@ -25,3 +34,17 @@ def product_detail(request, pk):
     context = {
         'product': product,
     }
+
+
+def cart(request):
+
+    context = {}
+    return render(request, 'store/cart.html', context)
+
+
+# collections = Collection.objects.filter(parent_id__isnull=True)
+
+# collection_children = Collection.objects.filter(parent_id = 1) # need find parent_id first and edit like that parent_id=parent_id
+
+
+# childrens_children = Collection.objects.filter(parent_id__isnull=False)
