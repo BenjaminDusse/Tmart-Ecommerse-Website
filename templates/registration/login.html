@@ -38,7 +38,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="htc__login__register__wrap">
-                    <!-- Start Single Content -->
+                    <!-- Start ngle Content -->
                     <div id="login" role="tabpanel" class="single__tabs__panel tab-pane fade in active">
                         <form class="login" method="post">
                             {% csrf_token %}
@@ -56,7 +56,7 @@
 
                         <div class="htc__social__connect">
                             <h3 class="mt--30">Don't have an acoount?
-                                <a href="" style="color: #ff4136;">Create an Account</a>
+                                <a href="{% url 'users:signup' %}" style="color: #ff4136;">Create an Account</a>
                             </h3>
                             <h2>Or Login With</h2>
                             <ul class="htc__soaial__list">
