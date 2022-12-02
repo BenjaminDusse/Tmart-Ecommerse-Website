@@ -53,14 +53,7 @@
                                     </div>
                                 </div>
                                 <!-- End Short Form -->
-                                <!-- Start List And Grid View -->
-                                <ul class="view__mode" role="tablist">
-                                    <li role="presentation" class="grid-view active"><a href="#grid-view" role="tab"
-                                            data-toggle="tab"><i class="zmdi zmdi-grid"></i></a></li>
-                                    <li role="presentation" class="list-view"><a href="#list-view" role="tab"
-                                            data-toggle="tab"><i class="zmdi zmdi-view-list"></i></a></li>
-                                </ul>
-                                <!-- End List And Grid View -->
+
                             </div>
                         </div>
                     </div>
@@ -75,7 +68,7 @@
                                     <div class="product">
                                         <div class="product__inner">
                                             <div class="pro__thumb">
-                                                <a href="#">
+                                                <a href="{{ product.get_absolute_url }}">
                                                     <img src="{{ product.image.url }}" alt="{{ product.title }}">
                                                 </a>
                                             </div>
@@ -84,7 +77,7 @@
                                                     <li><a data-toggle="modal" data-target="#productModal-{{ forloop.counter }}"
                                                             title="Quick View" class="quick-view modal-view detail-link"
                                                             href="#"><span class="ti-plus"></span></a></li>
-                                                    <li><a title="Add To Cart" href="cart.html"><span
+                                                    <li><a title="Add To Cart" href="{% url 'cart:cart_detail' %}"><span
                                                                 class="ti-shopping-cart"></span></a></li>
                                                     <li><a title="Wishlist" href="wishlist.html"><span
                                                                 class="ti-heart"></span></a></li>

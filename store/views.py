@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView
 from store.models import Product, ProductImage, Collection
-
+from cart.forms import CartAddProductForm
 
 def home(request):
     collections = Collection.objects.only('title', 'parent').filter(parent_id__isnull=True)
@@ -18,7 +18,6 @@ def home(request):
 
 def products(request):
     products = Product.objects.all()
-    
 
     context = {
         'products': products
@@ -30,18 +29,14 @@ class ProductDetailView(DetailView):
     template_name = 'store/product_detail.html'
 
 def product_detail(request, pk):
-    product = Product.objects.get(id=pk)
+    product = get_object_or_404(Product, id=pk)
+    cart_product_form = CartAddProductForm()
 
     context = {
         'product': product,
+        'cart_product_form': cart_product_form,
     }
-
-
-def cart(request):
-
-    context = {}
-    return render(request, 'store/cart.html', context)
-
+    return render(request, 'store/product_detail.html', context)
 
 # collections = Collection.objects.filter(parent_id__isnull=True)
 

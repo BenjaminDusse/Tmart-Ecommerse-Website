@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'tags',
     'likes',
     'playground',
+    'cart',
 ]
 
 INTERNAL_IPS = [
@@ -223,3 +224,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'core.User'
 
+CART_SESSION_ID = 'cart'

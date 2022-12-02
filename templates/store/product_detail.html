@@ -86,19 +86,20 @@
                             </ul>
                         </div>
                         <div class="product-action-wrap">
-                            <div class="prodict-statas"><span>Quantity :</span></div>
+
                             <div class="product-quantity">
-                                <form id='myform' method='POST' action='#'>
-                                    <div class="product-quantity">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="02">
-                                        </div>
-                                    </div>
+                                <form action="{% url 'cart:cart_add' product.pk %}" id='myform' method='POST'>
+
+                                    {% csrf_token %}
+                                    {{ cart_product_form }}
+                                    <button class="buy__now__btn" type="submit">
+                                        BUY NOW
+                                    </button>
                                 </form>
                             </div>
                         </div>
                         <ul class="pro__dtl__btn">
-                            <li class="buy__now__btn"><a href="#">buy now</a></li>
+                            <!-- <li class="buy__now__btn"><a href="#" type="submit">buy now</a></li> -->
                             <li><a href="#"><span class="ti-heart"></span></a></li>
                             <li><a href="#"><span class="ti-email"></span></a></li>
                         </ul>
