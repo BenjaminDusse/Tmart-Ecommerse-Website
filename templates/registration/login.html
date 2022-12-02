@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
 <!-- Start Bradcaump area -->
@@ -10,11 +10,11 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="bradcaump__inner text-center">
-                        <h2 class="bradcaump-title">login & Register</h2>
+                        <h2 class="bradcaump-title">login</h2>
                         <nav class="bradcaump-inner">
                             <a class="breadcrumb-item" href="index.html">Home</a>
                             <span class="brd-separetor">/</span>
-                            <span class="breadcrumb-item active">login & Register</span>
+                            <span class="breadcrumb-item active">Login</span>
                         </nav>
                     </div>
                 </div>
@@ -41,11 +41,12 @@
                     <!-- Start Single Content -->
                     <div id="login" role="tabpanel" class="single__tabs__panel tab-pane fade in active">
                         <form class="login" method="post">
-                            <input type="text" placeholder="User Name" name="username">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <button type="submit">Log In</button>
+                            <!-- <input type="text" placeholder="User Name" name="username">
                             <input type="password" placeholder="Password" , name="password">
-                            <div class="htc__login__btn mt--30">
-                                <a href="#">Login</a>
-                            </div>
+                            <button type="submit" class="btn btn-primary text-center">Login</button> -->
                         </form>
                         <!-- <div class="tabs__checkbox">
                             <input type="checkbox">
@@ -55,7 +56,7 @@
 
                         <div class="htc__social__connect">
                             <h3 class="mt--30">Don't have an acoount?
-                                <a href="{% url 'users:register' %}" style="color: #ff4136;">Create an Account</a>
+                                <a href="" style="color: #ff4136;">Create an Account</a>
                             </h3>
                             <h2>Or Login With</h2>
                             <ul class="htc__soaial__list">
@@ -70,6 +71,13 @@
                         </div>
                     </div>
                     <!-- End Single Content -->
+
+
+                    {% for message in messages %}
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
 
                     <!-- End Single Content -->
                 </div>

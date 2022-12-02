@@ -1,10 +1,5 @@
-from django.shortcuts import render
+from django.contrib import auth, messages
+from django.shortcuts import render, redirect
 
-def login(request):
-
-    if request.met
-
-    return render(request, 'auth/login.html')
-
-def register(request):
-    return render(request, 'auth/register.html')
+class SignUpView():
+    pass
