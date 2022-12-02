@@ -13,12 +13,8 @@ def cart_add(request, product_id):
         cd = form.cleaned_data
         # print(cd)
         cart.add(product=product, quantity=cd['quantity'], override_quantity=cd['override'])
-        print('******************************')
-    
 
     return redirect('cart:cart_detail')
-
-
 
 def cart_remove(request, product_id):
     cart = Cart(request)
@@ -35,9 +31,7 @@ def cart_detail(request):
                 'override': True
             }
         )
-
     context = {
         'cart': cart,
-        
     }
     return render(request, 'cart/detail.html', context)

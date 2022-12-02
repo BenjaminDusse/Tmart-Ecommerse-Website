@@ -44,15 +44,12 @@ class Cart(object):
             item['unit_price'] = Decimal(item['unit_price'])
             item['total_price'] = item['unit_price'] * item['quantity']
             yield item
-
         
     def __len__(self):
         return sum(item['quantity'] for item in self.cart.values())
 
-    def get_subtotal_price(self, product: Product):
-        print(sum(Decimal(item['quantity'] * product.unit_price) for item in self.cart.values()))
-        return sum(Decimal(item['quantity'] * product.unit_price) for item in self.cart.values())
-
+    def get_sub_total_price(self):
+        return (Decimal(item['unit_price'] * item['quantity']) for item in self.cart.values())
 
     def get_total_price(self):
         return sum(Decimal(item['unit_price'] * item['quantity']) for item in self.cart.values())

@@ -72,17 +72,6 @@
                                                     <img src="{{ product.image.url }}" alt="{{ product.title }}">
                                                 </a>
                                             </div>
-                                            <div class="product__hover__info">
-                                                <ul class="product__action">
-                                                    <li><a data-toggle="modal" data-target="#productModal-{{ forloop.counter }}"
-                                                            title="Quick View" class="quick-view modal-view detail-link"
-                                                            href="#"><span class="ti-plus"></span></a></li>
-                                                    <li><a title="Add To Cart" href="{% url 'cart:cart_detail' %}"><span
-                                                                class="ti-shopping-cart"></span></a></li>
-                                                    <li><a title="Wishlist" href="wishlist.html"><span
-                                                                class="ti-heart"></span></a></li>
-                                                </ul>
-                                            </div>
                                         </div>
                                         <div class="product__details">
                                             <h2><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h2>

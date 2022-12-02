@@ -28,8 +28,8 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = 'store/product_detail.html'
 
-def product_detail(request, pk):
-    product = get_object_or_404(Product, id=pk)
+def product_detail(request, id):
+    product = get_object_or_404(Product, id=id)
     cart_product_form = CartAddProductForm()
 
     context = {

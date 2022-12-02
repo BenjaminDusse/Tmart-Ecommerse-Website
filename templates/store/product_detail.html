@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 
 {% block content %}
 <!-- Body main wrapper start -->
@@ -88,11 +88,11 @@
                         <div class="product-action-wrap">
 
                             <div class="product-quantity">
-                                <form action="{% url 'cart:cart_add' product.pk %}" id='myform' method='POST'>
+                                <form action="{% url 'cart:cart_add' product.id %}" id='myform' method='POST'>
 
                                     {% csrf_token %}
-                                    {{ cart_product_form }}
-                                    <button class="buy__now__btn" type="submit">
+                                    {{ cart_product_form | crispy }}
+                                    <button class="btn btn-primary" type="submit">
                                         BUY NOW
                                     </button>
                                 </form>

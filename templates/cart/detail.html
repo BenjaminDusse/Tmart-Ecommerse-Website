@@ -99,16 +99,17 @@
                                     <td class="product-thumbnail"><a href="#"><img src="{{ product.image.url }}"
                                                 alt="product img" /></a>
                                     </td>
-                                    <td class="product-name"><a href="#">{{ product.title }}</a></td>
+                                    <td class="product-name"><a href="{{ product.get_absolute_url }}">{{ product.title}}</a></td>
                                     <td class="product-price"><span class="amount">${{ product.unit_price }}</span></td>
                                     <td class="product-quantity">
-                                        <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                        <form action="{% url 'cart:cart_add' product.id %}" method="POST">
                                             {% csrf_token %}
                                             {{ item.update_quantity_form.quantity }}
                                             {{ item.update_quantity_form.override }}
+                                            <input type="submit" value="Update">
                                         </form>
                                     </td>
-                                    <td class="product-subtotal">{{ cart.get_subtotal_price }}</td>
+                                    <td class="product-subtotal">{{ product.get_sub_total_price }}</td>
                                     <td class="product-remove"><a href="{%  url 'cart:cart_remove' product.id %}">X</a>
                                     </td>
                                 </tr>
@@ -120,8 +121,7 @@
                     <div class="row">
                         <div class="col-md-8 col-sm-7 col-xs-12">
                             <div class="buttons-cart">
-                                <input type="submit" value="Update Cart" />
-                                <a href="#">Continue Shopping</a>
+                                <a href="{% url 'store:products' %}">Continue Shopping</a>
                             </div>
                             <div class="coupon">
                                 <h3>Coupon</h3>

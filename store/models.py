@@ -41,7 +41,6 @@ class Collection(MPTTModel, models.Model):
         verbose_name = 'Collections'
         verbose_name_plural = 'Collection'
 
-
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
@@ -69,7 +68,7 @@ class Product(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('store:product_detail', kwargs={'pk': self.pk})
+        return reverse('store:product_detail', kwargs={'id': self.id})
 
     class Meta:
         verbose_name = 'Products'
