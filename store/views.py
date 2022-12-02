@@ -3,30 +3,31 @@ from django.views.generic import DetailView
 from store.models import Product, ProductImage, Collection
 from cart.forms import CartAddProductForm
 
-def home(request):
+def home(request, collection_slug=None):
+    collection=None
     collections = Collection.objects.only('title', 'parent').filter(parent_id__isnull=True)
-    # parent_id = request.
-    # collection_children = Collection.objects.filter(parent_id__isnull=False)
+    products= Product.objects.values('collection')
+    if collection_slug:
+        collection = get_object_or_404(Collection, slug=collection_slug)
+        products = products.filter(collection=collection)
     
     context = {
+        'collection': collection,
         'collections': collections,
+        'products': products
         # 'collection_children': collection_children,
     }
 
     return render(request, 'store/index.html', context)
 
 
-def products(request):
+def product_list(request):
     products = Product.objects.all()
 
     context = {
         'products': products
     }
     return render(request, 'store/product_list.html', context)
-
-class ProductDetailView(DetailView):
-    model = Product
-    template_name = 'store/product_detail.html'
 
 def product_detail(request, id):
     product = get_object_or_404(Product, id=id)

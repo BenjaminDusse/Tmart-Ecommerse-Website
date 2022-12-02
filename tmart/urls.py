@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cart/', include('cart.urls', namespace='cart')),
     path("", include('store.urls', namespace='store')),
-
+    path("users/", include('users.urls', namespace='users')),
 
     path('__debug__/', include('debug_toolbar.urls')),  
     path('ckeditor/', include('ckeditor_uploader.urls')),
@@ -32,3 +32,4 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
