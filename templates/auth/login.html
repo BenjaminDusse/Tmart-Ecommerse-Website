@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area"
+    style="background: rgba(0, 0, 0, 0) url(images/bg/2.jpg) no-repeat scroll center center / cover ;">
+    <div class="ht__bradcaump__wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bradcaump__inner text-center">
+                        <h2 class="bradcaump-title">login & Register</h2>
+                        <nav class="bradcaump-inner">
+                            <a class="breadcrumb-item" href="index.html">Home</a>
+                            <span class="brd-separetor">/</span>
+                            <span class="breadcrumb-item active">login & Register</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+<!-- Start Login Register Area -->
+<div class="htc__login__register bg__white ptb--130">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <ul class="login__register__menu" role="tablist">
+                    <h1 role="presentation" class="login">Login
+                    </h1>
+                </ul>
+            </div>
+        </div>
+        <!-- Start Login Register Content -->
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="htc__login__register__wrap">
+                    <!-- Start Single Content -->
+                    <div id="login" role="tabpanel" class="single__tabs__panel tab-pane fade in active">
+                        <form class="login" method="post">
+                            <input type="text" placeholder="User Name" name="username">
+                            <input type="password" placeholder="Password" , name="password">
+                            <div class="htc__login__btn mt--30">
+                                <a href="#">Login</a>
+                            </div>
+                        </form>
+                        <!-- <div class="tabs__checkbox">
+                            <input type="checkbox">
+                            <span> Remember me</span>
+                            <span class="forget"><a href="#">Forget Pasword?</a></span>
+                        </div> -->
+
+                        <div class="htc__social__connect">
+                            <h3 class="mt--30">Don't have an acoount?
+                                <a href="{% url 'users:register' %}" style="color: #ff4136;">Create an Account</a>
+                            </h3>
+                            <h2>Or Login With</h2>
+                            <ul class="htc__soaial__list">
+                                <li><a class="bg--twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+
+                                <li><a class="bg--instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+
+                                <li><a class="bg--facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+
+                                <li><a class="bg--googleplus" href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End Single Content -->
+
+                    <!-- End Single Content -->
+                </div>
+            </div>
+        </div>
+        <!-- End Login Register Content -->
+    </div>
+</div>
+<!-- End Login Register Area -->
+
+{% endblock content %}
