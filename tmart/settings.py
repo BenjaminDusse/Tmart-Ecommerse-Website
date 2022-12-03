@@ -231,3 +231,7 @@ LOGOUT_REDIRECT_URL = 'store:home' # new
 AUTH_USER_MODEL = 'core.User'
 
 CART_SESSION_ID = 'cart'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
