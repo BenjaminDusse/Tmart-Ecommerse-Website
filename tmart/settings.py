@@ -233,5 +233,11 @@ AUTH_USER_MODEL = 'core.User'
 CART_SESSION_ID = 'cart'
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'abduhakimovfazliddin2002@gmail.com'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = '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'
+EMAIL_HOST_PASSWORD = 'abduhakimovfazliddin2002'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
