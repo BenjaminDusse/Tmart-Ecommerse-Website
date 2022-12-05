@@ -7,3 +7,5 @@ from blog.models import *
 #     list_display = ['title', 'slogan', 'image', 'author']
 
 admin.site.register(Post)
+admin.site.register(Category)
+admin.site.register(Comment)

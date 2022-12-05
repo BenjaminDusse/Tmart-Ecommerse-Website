@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
 <!-- Start Bradcaump area -->
 <div class="ht__bradcaump__area"
-    style="background: rgba(0, 0, 0, 0) url(images/bg/2.jpg) no-repeat scroll center center / cover ;">
+    style="background: rgba(0, 0, 0, 0) url({% static 'images/bg/2.jpg' %}) no-repeat scroll center center / cover ;">
     <div class="ht__bradcaump__wrap">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="bradcaump__inner text-center">
-                        <h2 class="bradcaump-title">Blog 2 column</h2>
+                        <h2 class="bradcaump-title">Blog</h2>
                         <nav class="bradcaump-inner">
                             <a class="breadcrumb-item" href="index.html">Home</a>
                             <span class="brd-separetor">/</span>
-                            <span class="breadcrumb-item active">Blog 2 column</span>
+                            <span class="breadcrumb-item active">Blog</span>
                         </nav>
                     </div>
                 </div>
@@ -37,7 +37,8 @@
                                 <div class="blog__inner">
                                     <div class="blog__thumb">
                                         <a href="{{ post.get_absolute_url }}">
-                                            <img style="width: 370px; height: 347px;" src="{{ post.image.url }}" alt="{{ post.title }}">
+                                            <img style="width: 370px; height: 347px;" src="{{ post.image.url }}"
+                                                alt="{{ post.title }}">
                                         </a>
                                         <div class="blog__post__time">
                                             <div class="post__time--inner">
@@ -48,11 +49,12 @@
                                     </div>
                                     <div class="blog__hover__info">
                                         <div class="blog__hover__action">
-                                            <p class="blog__des"><a href="{{ post.get_absolute_url }}">{{ post.title}}</a></p>
+                                            <p class="blog__des"><a href="{{ post.get_absolute_url }}">{{post.title}}</a></p>
                                             <ul class="bl__meta">
                                                 <li>By :<a href="#">{{ post.author }}</a></li>
                                                 <li>
-                                                    <a href="{{ post.product.get_absolute_url }}">{{ post.product|truncatewords:8|safe }}</a>
+                                                    <a href="{{ post.product.get_absolute_url }}">{{
+                                                        post.product|truncatewords:8|safe }}</a>
                                                 </li>
                                             </ul>
                                             <div class="blog__btn">

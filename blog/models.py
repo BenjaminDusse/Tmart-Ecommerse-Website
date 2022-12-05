@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from store.models import Customer
 from django.urls import reverse
 from store.models import Product
 from django_resized import ResizedImageField
@@ -39,7 +40,7 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     description = models.TextField(max_length=1500)
     slogan = models.CharField(max_length=200, blank=True, null=True)
-    image =models.ImageField(upload_to='post_images')
+    image = models.ImageField(upload_to='post_images')
 
     def get_absolute_url(self):
         return reverse('blog:blog_detail', kwargs={'pk': self.pk, 'slug': self.slug})
@@ -52,10 +53,15 @@ class Post(models.Model):
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
-        # img = Image.open(self.image.path)
-        # if img.height > 300 or img.width > 300:
-        #     output_size = (370, 347)
-        #     img.thumbnail(output_size)
-        #     img.save(self.image.path)
 
+class Comment(models.Model):
+    author = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='comments')
+    post = models.ForeignKey(Post, on_delete=models.SET_NULL, null=True, related_name='comments')
+    message = models.TextField(max_length=500)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.author}'s comment"
 

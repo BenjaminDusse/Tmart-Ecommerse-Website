@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <!-- End Offset Wrapper -->
@@ -35,10 +36,10 @@
                         <!--Start Blog Thumb -->
                         <div class="blog-details-thumb-wrap">
                             <div class="blog-details-thumb">
-                                <img src="{{ post.image.url }}" alt="{{ post.title }}" style="">
+                                <img src="{{ post.image.url }}" alt="{{ post.title }}">
                             </div>
                             <div class="upcoming-date">
-                                14<span class="upc-mth">{{ post.date_created|date:"M" }},{{ post.date_created|date:"Y"}}</span>
+                                14<span class="upc-mth">{{ post.date_created|date:"M" }},{{post.date_created|date:"Y"}}</span>
                             </div>
                         </div>
                         <!--End Blog Thumb -->
@@ -75,27 +76,34 @@
                         <!-- Start Blog Comment Area -->
                         <div class="our-blog-comment mt--20">
                             <div class="blog-comment-inner">
-                                <h2 class="section-title-2">COMMENTS (03)</h2>
+                                <h2 class="section-title-2">COMMENTS</h2>
                                 <!-- Start Single Comment -->
+                                {% for comment in comments %}
                                 <div class="single-blog-comment">
                                     <div class="blog-comment-thumb">
-                                        <img src="images/comment/1.jpg" alt="comment images">
+                                        <img src="{{ comment.author.profile_pic.url }}" alt="{{ comment.author }}">
                                     </div>
                                     <div class="blog-comment-details">
                                         <div class="comment-title-date">
-                                            <h2><a href="#">Martin Payet</a></h2>
+                                            <h2><a href="#">{{ comment.author }}</a></h2>
                                             <div class="reply">
-                                                <p>14 Sep 2017 / <a href="#">REPLY</a></p>
+                                                <p style="padding-left: 12px;">{{ comment.date_created|date:"j" }} {{ comment.date_created|date:"M"}} {{ comment.date_created|date:"Y" }} / <a href="#">REPLY</a></p>
                                             </div>
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incidi ut labore et dolo magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation.</p>
+                                        <p>{{ comment.message }}</p>
                                     </div>
                                 </div>
+                                {% empty %}
+                                <p>There are no comments yet.</p>
+                                {% endfor %}
                                 <!-- End Single Comment -->
                                 <!-- Start Single Comment -->
-                                <div class="single-blog-comment comment-reply">
+
+
+                                <!-- Reply section -->
+
+
+                                <!-- <div class="single-blog-comment comment-reply">
                                     <div class="blog-comment-thumb">
                                         <img src="images/comment/2.jpg" alt="comment images">
                                     </div>
@@ -110,25 +118,10 @@
                                             tempor incidi ut labore et dolo magna aliqua. Ut enim ad minim veniam, quis
                                             nostrud exercitation.</p>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- End Single Comment -->
                                 <!-- Start Single Comment -->
-                                <div class="single-blog-comment">
-                                    <div class="blog-comment-thumb">
-                                        <img src="images/comment/3.jpg" alt="comment images">
-                                    </div>
-                                    <div class="blog-comment-details">
-                                        <div class="comment-title-date">
-                                            <h2><a href="#">Martin Payet</a></h2>
-                                            <div class="reply">
-                                                <p>14 Sep 2017 / <a href="#">REPLY</a></p>
-                                            </div>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incidi ut labore et dolo magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation.</p>
-                                    </div>
-                                </div>
+
                                 <!-- End Single Comment -->
                             </div>
                         </div>
@@ -138,21 +131,16 @@
                             <h2 class="section-title-2">LEAVE A REPLY</h2>
                             <div class="reply-form-inner mt--40">
                                 <div class="reply-form-box">
-                                    <div class="reply-form-box-inner">
-                                        <div class="rfb-single-input">
-                                            <input type="text" placeholder="Name*">
-                                        </div>
-                                        <div class="rfb-single-input">
-                                            <input type="email" placeholder="Email*">
-                                        </div>
-                                    </div>
+                                    <form action="." method="post">
+                                        {% csrf_token %}
+                                        {{ comment_form }}
+                                        <!-- <div class="blog__details__btn">
+                                            <a type="submit" class="htc__btn btn--gray" href="#">submit</a>
+                                        </div> -->
+                                        <button type="submit">Submit</button>
+                                    </form>
                                 </div>
-                                <div class="reply-form-box">
-                                    <textarea name="message" placeholder="Message"></textarea>
-                                </div>
-                                <div class="blog__details__btn">
-                                    <a class="htc__btn btn--gray" href="#">submit</a>
-                                </div>
+
                             </div>
                         </div>
                         <!-- End Reply Form -->
