@@ -50,7 +50,7 @@ class Product(models.Model):
     """Product(item) model"""
 
     title = models.CharField(max_length=255)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True, blank=True)
     description = RichTextField()
     details = RichTextField(blank=True)
     features = RichTextField(blank=True)
@@ -68,6 +68,11 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('store:product_detail', kwargs={'id': self.id})
+
+    def save(self, commit=True, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Products'
