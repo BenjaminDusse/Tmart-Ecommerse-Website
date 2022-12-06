@@ -1,5 +1,6 @@
 from django.contrib import admin
 from ckeditor.fields import RichTextField
+from django_resized import ResizedImageField
 from django.db.models.query import QuerySet
 from django.db import models
 from django.core.validators import MinValueValidator
@@ -101,7 +102,7 @@ class Customer(models.Model):
     membership = models.CharField(
         max_length=6, choices=MEMBERSHIP_CHOICES, default=MEMBERSHIP_BRONZE
     )
-    profile_pic = models.ImageField(upload_to='profile_pics/%Y%m%d', null=True, blank=True)
+    profile_pic = ResizedImageField([320, 320], upload_to='profile_pics/%Y%m%d', null=True, blank=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='customer')
 
     def __str__(self):

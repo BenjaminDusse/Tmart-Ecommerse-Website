@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'ckeditor',
     'mptt',
+    'django_seed',
     'crispy_forms',
 
     'core',
