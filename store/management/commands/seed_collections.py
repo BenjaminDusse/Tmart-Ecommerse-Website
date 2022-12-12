@@ -20,8 +20,9 @@ class Command(BaseCommand):
             Collection,
             number,
             {
-                'title': lambda x: seeder.faker.job()
-            },
+                'title': seeder.faker.job()
+            }
         )
-
         seeder.execute()
+        self.stdout.write(self.style.SUCCESS(f"{number} {NAME} created!"))
+

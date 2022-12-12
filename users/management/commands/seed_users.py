@@ -1,9 +1,11 @@
 import random
 from django.core.management.base import BaseCommand, CommandError
 from django_seed import Seed
-from store.models import Promotion
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
-NAME = 'collections'
+NAME = 'users'
+
 
 class Command(BaseCommand):
     help = 'This command creates {NAME}'
@@ -16,13 +18,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         number = options.get("number")
         seeder = Seed.seeder()
-        collections = Promotion.objects.all()
         seeder.add_entity(
-            Promotion,
+            User,
             number,
             {
-                'description': lambda x: seeder.faker.job(),
-                'discount': lambda x: random.randrange(1, 5)
+                "is_staff": False,
+                "is_superuser": False
             },
         )
 
