@@ -1,8 +1,10 @@
+import random
 from django.core.management.base import BaseCommand, CommandError
 from django_seed import Seed
-from store.models import Collection
+from store.models import Collection, Product
 
 NAME = 'collections'
+
 
 class Command(BaseCommand):
     help = 'This command creates {NAME}'
@@ -15,14 +17,14 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         number = options.get("number")
         seeder = Seed.seeder()
-        collections = Collection.objects.all()
-        seeder.add_entity(
-            Collection,
-            number,
-            {
-                'title': seeder.faker.job()
-            }
-        )
-        seeder.execute()
-        self.stdout.write(self.style.SUCCESS(f"{number} {NAME} created!"))
+        products = Product.objects.all()
+        try:
+            for i in range(3):
+                Collection.objects.create(
+                    title=seeder.faker.name()
+                )
 
+            self.stdout.write(self.style.SUCCESS(
+                f"{number} {NAME} created!"))
+        except Exception as e:
+            self.stdout.write(self.style.WARNING(f"{e} Error found ...."))
